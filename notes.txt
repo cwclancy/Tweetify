@@ -1,0 +1,2 @@
+sp.user_playlist_create(username, playlist_name, public=False, description=playlist_description)
+pip install git+https://github.com/plamere/spotipy.git --upgrade
