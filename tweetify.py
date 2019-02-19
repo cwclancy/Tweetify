@@ -15,16 +15,44 @@ auth.set_access_token(access_token, access_secret)
 
 api = tweepy.API(auth)
 
-thread_start = api.get_status("1091073809707352072")
-current_tweet = thread_start
-song_titles = []
-while (current_tweet._json["in_reply_to_status_id_str"]):
-    next_id = current_tweet._json["in_reply_to_status_id_str"]
-    song_titles.append(current_tweet.text)
-    current_tweet = api.get_status(next_id)
+status_id = "1091073809707352072"
 
-song_titles.reverse()
-pp.pprint(song_titles)
-# print(json.dumps(thread_start._json, indent=4, sort_keys=True))
+def get_thread(thread_start):
+    current_tweet = api.get_status(thread_start)
+    song_titles = []
+    while (current_tweet._json["in_reply_to_status_id_str"]):
+        next_id = current_tweet._json["in_reply_to_status_id_str"]
+        song_titles.append(current_tweet.text)
+        current_tweet = api.get_status(next_id)
+    song_titles.reverse()
+    return song_titles
+
+def find_start_index(song_arr):
+    return 1
+
+def find_end_index(song_arr):
+    for i in range(len(song_arr)):
+        if song_arr[i] == "-":
+            return i
+    return 0
+
+def clean_song(song):
+    song_title = ""
+    song_arr = song.split(" ")
+    start_index = find_start_index(song_arr)
+    end_index = find_end_index(song_arr)
+    song_title = " ".join(song_arr[start_index:end_index])
+    return song_title
+
+def clean_thread(song_thread):
+    for i in range(len(song_thread)):
+        if i == 3:
+            song_thread[i] = "Lose yourself"
+        else:
+            song_thread[i] = clean_song(song_thread[i])
+    return song_thread
+
+
+pp.pprint(clean_thread(get_thread(status_id)))
 
 
