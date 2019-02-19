@@ -50,6 +50,9 @@ def clean_thread(song_thread):
             song_thread[i] = "Lose yourself"
         else:
             song_thread[i] = clean_song(song_thread[i])
+    for song in song_thread:
+        if not song:
+            song_thread.remove("")
     return song_thread
 
 
