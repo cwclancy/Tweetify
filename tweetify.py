@@ -16,8 +16,7 @@ auth.set_access_token(access_token, access_secret)
 
 api = tweepy.API(auth)
 
-white_folk_pt_1 = "1091073809707352072"
-white_folk_pt_2 = "1091075596183052288"
+status_id = "1091073809707352072"
 
 
 def get_thread(thread_start):
@@ -66,5 +65,5 @@ def create_playlist(thread_start, playlist_name, playlist_description):
     print("Your playlist: " + playlist_name + " was created")
 
 
-create_playlist(white_folk_pt_2, "PT 2: Songs white folks gave us", "twitter thread")
+create_playlist(status_id, "Playlist Name", "Playlist Description")
 
