@@ -1,3 +1,10 @@
+# Connor Clancy - cclancy@andrew.cmu.edu
+# Tweetify -
+#   Twitter utility function based around the twitter API wrapper Tweepy
+#   Requires a twitter dev account and auth stuff from twitter
+#   main functions:
+#       get_thread, create_playlist
+
 import tweepy
 import json
 import pprint
@@ -5,6 +12,7 @@ import spotter
 
 pp = pprint.PrettyPrinter(indent=4)
 
+## Twitter given auth stuff
 consumer_key = "ZMStQd7o698CXe1kbb9K7pmQN"
 consumer_secret = "S6kzYrIREWCxnRX00erOHF4TWxbhNduBdlQbvj1al9EnuVqWAU"
 
@@ -16,8 +24,12 @@ auth.set_access_token(access_token, access_secret)
 
 api = tweepy.API(auth)
 
-status_id = "1091073809707352072"
+status_id = "1091073809707352072" # last tweet id in thread (end # of url on desktop)
 
+
+## get_thread: string thread_start -> string list thread_text
+# thread_start - tweet id of the last element in the thread that you want
+# thread_text - a list of the text from each tweet
 
 def get_thread(thread_start):
     current_tweet = api.get_status(thread_start)
@@ -29,12 +41,20 @@ def get_thread(thread_start):
     song_titles.reverse()
     return song_titles
 
-def find_start_index(song_arr):
+## find_start_index: text_arr -> index
+# text_arr - the text of a tweet split by " "
+# index - position of beginning of song title
+
+def find_start_index(text_arr):
     return 1
 
-def find_end_index(song_arr):
-    for i in range(len(song_arr)):
-        if song_arr[i] == "-":
+## find_end_index: text_arr -> index
+# text_arr - the text of a tweet split by " "
+# index - position of end of song title
+
+def find_end_index(text_arr):
+    for i in range(len(text_arr)):
+        if text_arr[i] == "-":
             return i
     return 0
 
