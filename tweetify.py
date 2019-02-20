@@ -16,7 +16,9 @@ auth.set_access_token(access_token, access_secret)
 
 api = tweepy.API(auth)
 
-status_id = "1091073809707352072"
+white_folk_pt_1 = "1091073809707352072"
+white_folk_pt_2 = "1091075596183052288"
+
 
 def get_thread(thread_start):
     current_tweet = api.get_status(thread_start)
@@ -58,11 +60,11 @@ def clean_thread(song_thread):
 
 def create_playlist(thread_start, playlist_name, playlist_description):
     playlist_id = spotter.new_playlist(playlist_name, playlist_description)
-    song_titles = clean_thread(get_thread(status_id))
+    song_titles = clean_thread(get_thread(thread_start))
     song_ids = spotter.get_song_ids(song_titles)
     spotter.add_songs_to_playlist(playlist_id, song_ids)
     print("Your playlist: " + playlist_name + " was created")
 
 
-create_playlist(status_id, "Songs white folks gave us", "twitter thread")
+create_playlist(white_folk_pt_2, "PT 2: Songs white folks gave us", "twitter thread")
 

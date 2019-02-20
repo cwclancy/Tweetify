@@ -1,2 +1,6 @@
 sp.user_playlist_create(username, playlist_name, public=False, description=playlist_description)
 pip install git+https://github.com/plamere/spotipy.git --upgrade
+
+TODO: fix that it is hard coded for the format songs are given in
+TODO: automatically create playlist name (probably initial tweet of thread)
+TODO: would be nice if didn't have to get link to LAST tweet, but first tweet in thread
