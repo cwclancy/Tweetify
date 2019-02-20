@@ -1,6 +1,7 @@
 import tweepy
 import json
 import pprint
+import spotter
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -55,7 +56,13 @@ def clean_thread(song_thread):
             song_thread.remove("")
     return song_thread
 
+def create_playlist(thread_start, playlist_name, playlist_description):
+    playlist_id = spotter.new_playlist(playlist_name, playlist_description)
+    song_titles = clean_thread(get_thread(status_id))
+    song_ids = spotter.get_song_ids(song_titles)
+    spotter.add_songs_to_playlist(playlist_id, song_ids)
+    print("Your playlist: " + playlist_name + " was created")
 
-pp.pprint(clean_thread(get_thread(status_id)))
 
+create_playlist(status_id, "Songs white folks gave us", "twitter thread")
 

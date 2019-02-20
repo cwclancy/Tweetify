@@ -22,7 +22,7 @@ if token:
 else:
     raise "Failed to bind token"
 
-def create_playlist(playlist_name, playlist_description):
+def new_playlist(playlist_name, playlist_description):
     global username
     global sp
     playlist = sp.user_playlist_create(username, playlist_name, public=True, 
@@ -51,4 +51,3 @@ def add_songs_to_playlist(playlist_id, song_ids):
     
 
 
-print(get_song_id("Lose yourself"))
